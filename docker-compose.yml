@@ -22,3 +22,17 @@ services:
     command: [ "python3", "main.py" ]
     volumes: *common-volumes
     restart: always
+    depends_on:
+      - redis
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes: *common-volumes
+      #- /path/to/local/dаta:/root/redis
+      #- /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_PASSWORD=notimportant
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
